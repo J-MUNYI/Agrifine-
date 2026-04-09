@@ -1,90 +1,122 @@
+import useScrollReveal from '../utils/useScrollReveal';
+
+const products = [
+  {
+    name: 'Coffee',
+    types: 'Arabica & Robusta',
+    description: "Premium beans from Kenya's finest regions, grown under climate-smart practices.",
+    markets: ['Europe', 'Middle East', 'North America', 'Asia'],
+    image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800&h=600&fit=crop&q=80',
+    accent: 'green',
+    icon: '☕',
+  },
+  {
+    name: 'Tea',
+    types: 'Black and Green',
+    description: 'High-quality Kenyan black and green tea, carefully handpicked and processed to preserve its natural aroma, flavor, and antioxidants.',
+    markets: ['Europe', 'Middle East', 'Asia', 'North America'],
+    image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&h=600&fit=crop&q=80',
+    accent: 'brown',
+    icon: '🍵',
+  },
+  {
+    name: 'Hass Avocados',
+    types: 'Premium Quality',
+    description: 'High-quality, GAP-compliant avocados with superior freshness and traceability.',
+    markets: ['Europe (Netherlands, Spain, UK)', 'Middle East', 'Asia'],
+    image: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=800&h=600&fit=crop&q=80',
+    accent: 'green',
+    icon: '🥑',
+  },
+  {
+    name: 'Macadamia Nuts',
+    types: 'Raw and Roasted',
+    description: 'Premium raw and roasted nuts sourced sustainably from trusted farmers.',
+    markets: ['Asia (China, Japan, South Korea)', 'Europe', 'North America'],
+    image: 'https://images.unsplash.com/photo-1606312619070-d48b4e001c59?w=800&h=600&fit=crop&q=80',
+    accent: 'brown',
+    icon: '🌰',
+  },
+];
+
 const Products = () => {
-  const products = [
-    {
-      name: 'Coffee',
-      types: 'Arabica & Robusta',
-      description: 'Premium beans from Kenya\'s finest regions, grown under climate-smart practices.',
-      markets: ['Europe', 'Middle East', 'North America', 'Asia'],
-      image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800&h=600&fit=crop&q=80',
-      color: 'green'
-    },
-    {
-      name: 'Tea',
-      types: 'Black and Green',
-      description: 'High-quality Kenyan black and green tea, carefully handpicked and processed to preserve its natural aroma, flavor, and antioxidants.',
-      markets: ['Europe', 'Middle East', 'Asia', 'North America'],
-      image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&h=600&fit=crop&q=80',
-      color: 'brown'
-    },
-    {
-      name: 'Hass Avocados',
-      types: 'Premium Quality',
-      description: 'High-quality, GAP-compliant avocados with superior freshness and traceability.',
-      markets: ['Europe (Netherlands, Spain, UK)', 'Middle East', 'Asia'],
-      image: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=800&h=600&fit=crop&q=80',
-      color: 'green'
-    },
-    {
-      name: 'Macadamia Nuts',
-      types: 'Raw and Roasted',
-      description: 'Premium raw and roasted nuts sourced sustainably from trusted farmers.',
-      markets: ['Asia (China, Japan, South Korea)', 'Europe', 'North America'],
-      image: 'https://images.unsplash.com/photo-1606312619070-d48b4e001c59?w=800&h=600&fit=crop&q=80',
-      color: 'brown'
-    }
-  ];
+  const heroRef = useScrollReveal();
+  const gridRef = useScrollReveal();
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-green-600 to-green-700 dark:from-green-800 dark:to-green-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold mb-4">Our Products & Markets</h1>
-          <p className="text-xl text-green-100">
+
+      {/* ── Hero Banner ── */}
+      <section className="relative h-72 sm:h-96 flex items-end overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1400&h=600&fit=crop&q=85"
+            alt="Premium agricultural exports"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-green-900/80 via-green-800/40 to-transparent" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 w-full" ref={heroRef}>
+          <span className="section-badge reveal text-green-200 bg-white/10 border border-green-200/30">What We Offer</span>
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-white reveal reveal-delay-1">
+            Our Products & Markets
+          </h1>
+          <p className="text-green-100 text-lg mt-2 reveal reveal-delay-2">
             Premium-quality exports sourced sustainably from Kenyan farmers
           </p>
         </div>
       </section>
 
-      {/* Products Grid */}
-      <section className="py-16">
+      {/* ── Products Grid ── */}
+      <section className="py-20" ref={gridRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {products.map((product, index) => (
               <div
-                key={index}
-                className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow ${
-                  product.color === 'green' ? 'border-l-4 border-green-600' : 'border-l-4 border-brown-600'
-                }`}
+                key={product.name}
+                className={`reveal reveal-scale reveal-delay-${index + 1} group bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-1`}
               >
-                <div className="h-64 overflow-hidden">
+                {/* Image */}
+                <div className="h-64 img-zoom-wrap relative">
                   <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover"
                   />
-                </div>
-                <div className={`p-8 ${product.color === 'green' ? 'bg-green-50 dark:bg-green-900/20' : 'bg-brown-50 dark:bg-brown-900/20'}`}>
-                  <div className="flex-1">
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{product.name}</h2>
-                    <p className="text-accent dark:text-accent-light font-medium mb-3">{product.types}</p>
-                    <p className="text-gray-700 dark:text-gray-300 mb-4">{product.description}</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  <div className="absolute bottom-4 left-4 flex items-center gap-2">
+                    <span className="text-3xl">{product.icon}</span>
                     <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Export Markets:</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {product.markets.map((market, idx) => (
-                          <span
-                            key={idx}
-                            className={`px-3 py-1 rounded-full text-sm ${
-                              product.color === 'green'
-                                ? 'bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100'
-                                : 'bg-brown-100 dark:bg-brown-800 text-brown-800 dark:text-brown-100'
+                      <p className="text-white font-bold text-xl leading-tight">{product.name}</p>
+                      <p className="text-white/70 text-sm">{product.types}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className={`p-7 ${product.accent === 'green'
+                    ? 'border-l-4 border-green-500'
+                    : 'border-l-4 border-amber-600'
+                  }`}>
+                  <p className="text-gray-600 dark:text-gray-300 mb-5 leading-relaxed text-sm">
+                    {product.description}
+                  </p>
+                  <div>
+                    <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">
+                      Export Markets
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {product.markets.map((market, idx) => (
+                        <span
+                          key={idx}
+                          className={`px-3 py-1 rounded-full text-xs font-medium ${product.accent === 'green'
+                              ? 'bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200'
+                              : 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-200'
                             }`}
-                          >
-                            {market}
-                          </span>
-                        ))}
-                      </div>
+                        >
+                          {market}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -93,9 +125,22 @@ const Products = () => {
           </div>
         </div>
       </section>
+
+      {/* ── Quality Promise Banner ── */}
+      <section className="py-20 bg-green-700 dark:bg-green-900">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <div className="text-5xl mb-6">🌿</div>
+          <h2 className="text-3xl font-extrabold text-white mb-4">
+            Every Product. Every Batch. Traceable.
+          </h2>
+          <p className="text-green-200 text-lg max-w-2xl mx-auto">
+            Our traceability systems ensure that every shipment can be traced back to its farm of origin,
+            giving our buyers full confidence in quality and sustainability claims.
+          </p>
+        </div>
+      </section>
     </div>
   );
 };
 
 export default Products;
-
