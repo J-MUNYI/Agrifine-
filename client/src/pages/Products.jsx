@@ -1,30 +1,45 @@
 import useScrollReveal from '../utils/useScrollReveal';
 
+import coffeeArabicaImg from '../assets/products/coffee-arabica.jpg';
+import coffeeRobustaImg from '../assets/products/coffee-robusta.jpg';
+import teaKerichoImg from '../assets/products/tea-kericho.jpg';
+import avocadoHassImg from '../assets/products/avocado-hass.jpg';
+import macadamiaImg from '../assets/products/macadamia.jpg';
+
 const products = [
   {
-    name: 'Coffee',
-    types: 'Arabica & Robusta',
+    name: 'Arabica Coffee',
+    types: 'Kenya AA · Specialty Grade',
     description: "Premium beans from Kenya's finest regions, grown under climate-smart practices.",
     markets: ['Europe', 'Middle East', 'North America', 'Asia'],
-    image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=800&h=600&fit=crop&q=80',
+    image: coffeeArabicaImg,
     accent: 'green',
-    icon: '☕',
+    icon: '☕️',
+  },
+  {
+    name: 'Robusta Coffee',
+    types: 'High Body · Strong Profile',
+    description: "Carefully processed Kenyan robusta for bold blends and consistent quality at scale.",
+    markets: ['Europe', 'Middle East', 'North America', 'Asia'],
+    image: coffeeRobustaImg,
+    accent: 'brown',
+    icon: '🫘',
   },
   {
     name: 'Tea',
     types: 'Black and Green',
     description: 'High-quality Kenyan black and green tea, carefully handpicked and processed to preserve its natural aroma, flavor, and antioxidants.',
     markets: ['Europe', 'Middle East', 'Asia', 'North America'],
-    image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&h=600&fit=crop&q=80',
+    image: teaKerichoImg,
     accent: 'brown',
-    icon: '🍵',
+    icon: '🫖',
   },
   {
     name: 'Hass Avocados',
     types: 'Premium Quality',
     description: 'High-quality, GAP-compliant avocados with superior freshness and traceability.',
     markets: ['Europe (Netherlands, Spain, UK)', 'Middle East', 'Asia'],
-    image: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=800&h=600&fit=crop&q=80',
+    image: avocadoHassImg,
     accent: 'green',
     icon: '🥑',
   },
@@ -33,9 +48,9 @@ const products = [
     types: 'Raw and Roasted',
     description: 'Premium raw and roasted nuts sourced sustainably from trusted farmers.',
     markets: ['Asia (China, Japan, South Korea)', 'Europe', 'North America'],
-    image: 'https://images.unsplash.com/photo-1606312619070-d48b4e001c59?w=800&h=600&fit=crop&q=80',
+    image: macadamiaImg,
     accent: 'brown',
-    icon: '🌰',
+    icon: '🥜',
   },
 ];
 

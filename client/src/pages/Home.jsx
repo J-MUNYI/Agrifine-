@@ -2,6 +2,12 @@ import { Link } from 'react-router-dom';
 import useScrollReveal from '../utils/useScrollReveal';
 import useCounter from '../utils/useCounter';
 
+import coffeeArabicaImg from '../assets/products/coffee-arabica.jpg';
+import coffeeRobustaImg from '../assets/products/coffee-robusta.jpg';
+import teaKerichoImg from '../assets/products/tea-kericho.jpg';
+import avocadoHassImg from '../assets/products/avocado-hass.jpg';
+import macadamiaImg from '../assets/products/macadamia.jpg';
+
 /* ─── Animated stat item ─── */
 const StatItem = ({ target, suffix, label }) => {
   const { count, ref } = useCounter(target, 1800);
@@ -44,24 +50,29 @@ const features = [
 
 const products = [
   {
-    name: 'Coffee',
-    type: 'Arabica & Robusta',
-    image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&h=400&fit=crop&q=80',
+    name: 'Arabica Coffee',
+    type: 'Kenya AA',
+    image: coffeeArabicaImg,
+  },
+  {
+    name: 'Robusta Coffee',
+    type: 'Bold Profile',
+    image: coffeeRobustaImg,
   },
   {
     name: 'Tea',
     type: 'Black & Green',
-    image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&h=400&fit=crop&q=80',
+    image: teaKerichoImg,
   },
   {
     name: 'Avocados',
     type: 'Hass Variety',
-    image: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=600&h=400&fit=crop&q=80',
+    image: avocadoHassImg,
   },
   {
     name: 'Macadamia',
     type: 'Raw & Roasted',
-    image: 'https://images.unsplash.com/photo-1606312619070-d48b4e001c59?w=600&h=400&fit=crop&q=80',
+    image: macadamiaImg,
   },
 ];
 
@@ -186,7 +197,7 @@ const Home = () => {
               Our Premium Products
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {products.map((product, i) => (
               <div
                 key={product.name}
