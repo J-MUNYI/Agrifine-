@@ -43,7 +43,7 @@ const About = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 w-full" ref={heroRef}>
           <span className="section-badge reveal text-green-200 bg-white/10 border border-green-200/30">Our Story</span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white reveal reveal-delay-1">
-            About Agrifine Consulting
+            About Agrifine Consulting Limited
           </h1>
           <p className="text-green-100 text-lg mt-2 reveal reveal-delay-2">
             Professional Excellence · Environmental Responsibility · Market Innovation
