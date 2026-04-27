@@ -8,6 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const REFRESH_SECRET = process.env.REFRESH_SECRET || 'another-refresh-secret-change-in-production';
 const USERS_FILE = path.join(__dirname, '../data/users.json');
 
 // Ensure data directory exists
@@ -38,9 +39,14 @@ const saveUsers = (users) => {
   }
 };
 
-// Generate JWT token
+// Generate access token
 const generateToken = (userId) => {
-  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '7d' });
+  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '15m' });
+};
+
+// Generate refresh token
+const generateRefreshToken = (userId) => {
+  return jwt.sign({ userId }, REFRESH_SECRET, { expiresIn: '30d' });
 };
 
 // Register user
@@ -76,8 +82,17 @@ export const register = async (req, res) => {
     users.push(newUser);
     saveUsers(users);
 
-    // Generate token
+    // Generate tokens
     const token = generateToken(newUser.id);
+    const refreshToken = generateRefreshToken(newUser.id);
+
+    // Set refresh token as httpOnly cookie
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
 
     res.status(201).json({
       message: 'User created successfully',
@@ -117,8 +132,17 @@ export const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    // Generate token
+    // Generate tokens
     const token = generateToken(user.id);
+    const refreshToken = generateRefreshToken(user.id);
+
+    // Set refresh token as httpOnly cookie
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
 
     res.json({
       message: 'Login successful',
@@ -153,6 +177,45 @@ export const getMe = async (req, res) => {
         role: user.role
       }
     });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Refresh access token using httpOnly refresh cookie
+export const refreshToken = async (req, res) => {
+  try {
+    const cookieHeader = req.headers.cookie || '';
+    const cookies = Object.fromEntries(
+      cookieHeader.split(';').map(c => c.trim().split('='))
+    );
+    const token = cookies.refreshToken;
+
+    if (!token) {
+      return res.status(401).json({ message: 'Refresh token missing' });
+    }
+
+    const decoded = jwt.verify(token, REFRESH_SECRET);
+    const userId = decoded.userId;
+
+    // Optionally verify user still exists
+    const users = loadUsers();
+    const user = users.find(u => u.id === userId);
+    if (!user) return res.status(401).json({ message: 'Invalid refresh token' });
+
+    const newAccessToken = generateToken(userId);
+
+    res.json({ token: newAccessToken });
+  } catch (error) {
+    res.status(401).json({ message: 'Invalid or expired refresh token' });
+  }
+};
+
+// Logout: clear refresh cookie
+export const logout = async (req, res) => {
+  try {
+    res.cookie('refreshToken', '', { maxAge: 0 });
+    res.json({ message: 'Logged out' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
