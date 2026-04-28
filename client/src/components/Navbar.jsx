@@ -28,29 +28,19 @@ const Navbar = () => {
   return (
     <nav
       className={`sticky top-0 z-50 transition-all duration-300 ${scrolled
-          ? 'glass-nav shadow-lg'
-          : 'bg-white dark:bg-gray-900 shadow-md'
+        ? 'glass-nav shadow-lg'
+        : 'bg-white dark:bg-gray-900 shadow-md'
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex justify-between items-center transition-all duration-300 ${scrolled ? 'h-14' : 'h-20'}`}>
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
-            <svg
-              className="w-8 h-8 text-primary transition-transform duration-300 group-hover:rotate-12"
-              viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M16 3C10 3 5 8 5 14c0 4.5 2.5 8.4 6.2 10.4L16 29l4.8-4.6C24.5 22.4 27 18.5 27 14c0-6-5-11-11-11z"
-                fill="currentColor" opacity="0.15"
-              />
-              <path
-                d="M16 6c-3 0-7 3-7 8 0 2.5 1 4.8 2.6 6.4M16 6c3 0 7 3 7 8 0 2.5-1 4.8-2.6 6.4M16 6v16"
-                stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"
-              />
-              <path d="M16 22l-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-              <path d="M16 22l4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-            </svg>
+            <img
+              src="/logo.png"
+              alt="Agrifine logo"
+              className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-105"
+            />
             <div className="flex flex-col leading-none">
               <span className="text-xl font-extrabold text-primary tracking-tight">Agrifine</span>
               <span className="text-xs text-accent font-semibold tracking-widest uppercase">Consulting</span>
@@ -64,8 +54,8 @@ const Navbar = () => {
                 key={link.to}
                 to={link.to}
                 className={`nav-link text-sm font-semibold transition-colors pb-0.5 ${isActive(link.to)
-                    ? 'text-primary dark:text-green-400 active'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-green-400'
+                  ? 'text-primary dark:text-green-400 active'
+                  : 'text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-green-400'
                   }`}
               >
                 {link.label}
@@ -135,8 +125,8 @@ const Navbar = () => {
                 to={link.to}
                 onClick={() => setIsMenuOpen(false)}
                 className={`block px-3 py-2.5 rounded-lg font-semibold text-sm ${isActive(link.to)
-                    ? 'bg-green-50 dark:bg-green-900/20 text-primary dark:text-green-400'
-                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
+                  ? 'bg-green-50 dark:bg-green-900/20 text-primary dark:text-green-400'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                   }`}
               >
                 {link.label}

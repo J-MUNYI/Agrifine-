@@ -128,7 +128,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-gray-500">
           <div className="text-center sm:text-left">
             <p>© {currentYear} Agrifine Consulting Ltd. All rights reserved.</p>
-            <p className="mt-4 text-gray-400">A Muny1verse creation 🤍</p>
+            <p className="mt-4 text-gray-400">A Muny1verse creation 🤍.</p>
           </div>
           <p className="text-green-600 font-medium">🌿 Sustainably Sourced · Ethically Traded</p>
 
